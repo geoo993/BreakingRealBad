@@ -1,6 +1,6 @@
 import Foundation
 
-struct CharacterQuote: Identifiable {
+struct CharacterQuote: Hashable {
     let id: Int
     let line: String
     let author: String

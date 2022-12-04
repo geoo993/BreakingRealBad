@@ -16,7 +16,7 @@ enum HTTPMethod: String {
 }
 
 extension HTTPRequest {
-    var baseUrl: URL? { URL(string: "https://www.breakingbadapi.com/api") }
+    var baseUrl: URL? { URL(string: "https://www.breakingbadapi.com") }
     var method: HTTPMethod { .get }
     var queryItems: [URLQueryItem]? { nil }
     var timeoutInterval: TimeInterval { 30.0 }

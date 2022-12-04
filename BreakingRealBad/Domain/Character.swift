@@ -1,8 +1,9 @@
 import Foundation
 
-struct Character: Identifiable {
+struct Character: Hashable {
     let id: Int
     let name: String
     let portrayed: String
-    let imageUrl: URL
+    let imageUrl: URL?
+    var isFavoured: Bool
 }

@@ -6,7 +6,7 @@ import Foundation
 struct FetchCharacterQuotesRequest: HTTPRequest {
     typealias ResponseObject = [APIClient.CharacterQuote]
     typealias ErrorObject = APIError
-    var path: String { "/quote" }
+    var path: String { "/api/quote" }
     var queryItems: [URLQueryItem]?
     
     init(characterName: String) {

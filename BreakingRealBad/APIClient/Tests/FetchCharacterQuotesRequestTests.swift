@@ -22,7 +22,7 @@ final class FetchCharacterQuotesRequestTests: XCTestCase {
     func testRequest() {
         session.register(
             stub: HTTPSessionMock.Stub(
-                path: "/quote",
+                path: "/api/quote",
                 method: .get,
                 statusCode: 201,
                 data: FetchCharacterQuotesRequest.dummy()

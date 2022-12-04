@@ -6,5 +6,5 @@ import Foundation
 struct FetchCharactersRequest: HTTPRequest {    
     typealias ResponseObject = [APIClient.Character]
     typealias ErrorObject = APIError
-    var path: String { "/characters" }
+    var path: String { "/api/characters" }
 }
