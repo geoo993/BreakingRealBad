@@ -31,8 +31,11 @@ enum CharacterDetails {
               .catchToEffect()
               .map(Action.didLoad)
           
-      case let .didLoad(result):
-          state.quotes = Loading.from(result: result)
+      case let .didLoad(.success(value)):
+          state.quotes = .loaded(value)
+          return .none
+      case let .didLoad(.failure(value)):
+          state.quotes = .error(value)
           return .none
       case .didLikeCharacter:
           state.selectedCharacter?.isFavoured.toggle()

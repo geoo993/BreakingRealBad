@@ -29,7 +29,55 @@ final class CharactersTests: XCTestCase {
         }
         await testScheduler.advance(by: 1)
         await store.receive(.didLoad(.failure(AnyError(error)))) {
-            $0.characters = Loading.from(result: .failure(AnyError(error)))
+            $0.characters = .error(AnyError(error))
+        }
+    }
+    
+    func testDidFavourCharacter() async {
+        let characters: [Character] = [
+            .fixture(id: 3, isFavoured: false),
+            .fixture(id: 4, isFavoured: false)
+        ]
+        let store = makeSut(characters: .success(characters))
+        await store.send(.fetchCharacters) {
+            $0.characters = .loading(previous: .none)
+        }
+        await testScheduler.advance(by: 1)
+        await store.receive(.didLoad(.success(characters))) {
+            $0.characters = .loaded(characters)
+        }
+        await store.send(.didSelect(.fixture(id: 3, isFavoured: true)))
+        await store.receive(.didSave)
+        let newCharacters: [Character] = [
+            .fixture(id: 3, isFavoured: true),
+            .fixture(id: 4, isFavoured: false)
+        ]
+        await store.receive(.didLoad(.success(characters))) {
+            $0.characters = .loaded(newCharacters)
+        }
+    }
+    
+    func testDidUnfavourCharacter() async {
+        let characters: [Character] = [
+            .fixture(id: 3, isFavoured: true),
+            .fixture(id: 4, isFavoured: false)
+        ]
+        let store = makeSut(characters: .success(characters))
+        await store.send(.fetchCharacters) {
+            $0.characters = .loading(previous: .none)
+        }
+        await testScheduler.advance(by: 1)
+        await store.receive(.didLoad(.success(characters))) {
+            $0.characters = .loaded(characters)
+        }
+        await store.send(.didSelect(.fixture(id: 3, isFavoured: false)))
+        await store.receive(.didSave)
+        let newCharacters: [Character] = [
+            .fixture(id: 3, isFavoured: false),
+            .fixture(id: 4, isFavoured: false)
+        ]
+        await store.receive(.didLoad(.success(characters))) {
+            $0.characters = .loaded(newCharacters)
         }
     }
 }
@@ -37,7 +85,7 @@ final class CharactersTests: XCTestCase {
 extension CharactersTests {
     private func makeSut(
         characters: Result<[Character], Error> = .success([]),
-        favouredCharactersId: Result<[Int], Error> = .success([])
+        favouredCharacters: [CharacterFavourable] = []
     ) -> TestStore<
         Characters.State,
         Characters.State,
@@ -50,7 +98,7 @@ extension CharactersTests {
             reducer: Characters.reducer,
             environment: .init(
                 repository: CharacterRepositoryMock(
-                    charactersIds: favouredCharactersId,
+                    favourites: favouredCharacters,
                     characters: characters
                 ),
                 queue: testScheduler.eraseToAnyScheduler()

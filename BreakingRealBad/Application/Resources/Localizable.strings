@@ -1,5 +1,6 @@
 "error_alert_title" = "Hello 👋";
 "error_alert_description" = "Looks like Something went wrong.\n %@ \nPlease try again later!";
+"error_alert_message" = "Something went wrong.\nPlease try again later!";
 "error_alert_cta" = "Ok";
 
 "characters_list__screen" = "Characters";

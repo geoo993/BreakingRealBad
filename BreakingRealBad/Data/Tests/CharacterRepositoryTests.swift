@@ -63,4 +63,6 @@ final class CharacterRepositoryTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
         XCTAssertTrue(apiClient.executePublisherCalled)
     }
+    
+    // TODO: Add coredata persistence tests
 }

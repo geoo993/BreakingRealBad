@@ -37,13 +37,4 @@ enum Loading<T: Equatable>: Equatable {
             return false
         }
     }
-    
-    static func from<E: Error>(result: Result<T, E>) -> Self {
-        switch result {
-        case let .success(value):
-            return .loaded(value)
-        case let .failure(error):
-            return .error(AnyError(error))
-        }
-    }
 }

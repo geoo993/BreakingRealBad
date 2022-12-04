@@ -10,7 +10,6 @@
 		C7048013293BD3FA0080E4D7 /* BreakingRealBadApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7048012293BD3FA0080E4D7 /* BreakingRealBadApp.swift */; };
 		C7048015293BD3FA0080E4D7 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7048014293BD3FA0080E4D7 /* Persistence.swift */; };
 		C7048018293BD3FB0080E4D7 /* BreakingRealBad.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C7048016293BD3FB0080E4D7 /* BreakingRealBad.xcdatamodeld */; };
-		C704801A293BD3FB0080E4D7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7048019293BD3FB0080E4D7 /* ContentView.swift */; };
 		C704801C293BD3FD0080E4D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C704801B293BD3FD0080E4D7 /* Assets.xcassets */; };
 		C7048029293BD4CE0080E4D7 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7048028293BD4CE0080E4D7 /* Character.swift */; };
 		C704802B293BD7A50080E4D7 /* CharacterQuote.swift in Sources */ = {isa = PBXBuildFile; fileRef = C704802A293BD7A50080E4D7 /* CharacterQuote.swift */; };
@@ -67,7 +66,6 @@
 		C7048012293BD3FA0080E4D7 /* BreakingRealBadApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakingRealBadApp.swift; sourceTree = "<group>"; };
 		C7048014293BD3FA0080E4D7 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		C7048017293BD3FB0080E4D7 /* BreakingRealBad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BreakingRealBad.xcdatamodel; sourceTree = "<group>"; };
-		C7048019293BD3FB0080E4D7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C704801B293BD3FD0080E4D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C704801D293BD3FD0080E4D7 /* BreakingRealBad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BreakingRealBad.entitlements; sourceTree = "<group>"; };
 		C7048028293BD4CE0080E4D7 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
@@ -226,7 +224,6 @@
 				C7DE8B33293D005100856B1E /* Tests */,
 				C7F2DFCB293C0FB5007662A0 /* Characters.swift */,
 				C7F2DFD1293C1687007662A0 /* Characters.View.swift */,
-				C7048019293BD3FB0080E4D7 /* ContentView.swift */,
 			);
 			path = Characters;
 			sourceTree = "<group>";
@@ -505,7 +502,6 @@
 				C7DE8B30293CC7DE00856B1E /* CharacterDetails.swift in Sources */,
 				C7F2DFAE293BE970007662A0 /* HTTPRequest.swift in Sources */,
 				C7F2DFB6293BF595007662A0 /* CharacterDTO.swift in Sources */,
-				C704801A293BD3FB0080E4D7 /* ContentView.swift in Sources */,
 				C7F2DFBB293BF981007662A0 /* DummyProviding.swift in Sources */,
 				C7048015293BD3FA0080E4D7 /* Persistence.swift in Sources */,
 				C7F2DFB2293BED0C007662A0 /* APIClient.swift in Sources */,

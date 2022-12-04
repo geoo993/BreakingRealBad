@@ -4,7 +4,6 @@ import Foundation
 enum Characters {
     struct State: Equatable {
         var characters: Loading<[Character]> = .idle
-        var favouredCharactersId: [Int] = []
         var characterDetails: CharacterDetails.State = .init()
     }
 
@@ -12,6 +11,7 @@ enum Characters {
         case fetchCharacters
         case didLoad(Result<[Character], AnyError>)
         case didSelect(Character)
+        case didSave
         case characterDetails(CharacterDetails.Action)
     }
     
@@ -42,28 +42,34 @@ enum Characters {
                     .catchToEffect()
                     .map(Action.didLoad)
                 
-            case let .didLoad(result):
-                state.characters = Loading.from(result: result)
-                return .none
-            case let .didSelect(character):
-                // TODO: Refactor this logic and add persistence
-                guard let characters = state.characters.loaded else { return .none }
-                var newArr: [Int]
-                if character.isFavoured {
-                    newArr = state.favouredCharactersId
-                    newArr.append(character.id)
-                } else {
-                    newArr = state.favouredCharactersId.filter{ $0 != character.id }
+            case let .didLoad(.success(values)):
+                guard let favored = try? environment.repository.savedCharacters(), !favored.isEmpty else {
+                    state.characters = .loaded(values)
+                    return .none
                 }
-
-                state.favouredCharactersId = newArr
                 var newCharacters: [Character] = []
-                characters.forEach { item in
+                values.forEach { item in
                     var char = item
-                    char.isFavoured = state.favouredCharactersId.contains(item.id)
+                    if let savedChar = favored.first(where: { $0.id == item.id }) {
+                        char.isFavoured = savedChar.isFavoured
+                    }
                     newCharacters.append(char)
                 }
-                return Effect(value: .didLoad(.success(newCharacters)))
+                state.characters = .loaded(newCharacters)
+                return .none
+            case let .didLoad(.failure(error)):
+                state.characters = .error(error)
+                return .none
+            case let .didSelect(character):
+                guard let _ = try? environment.repository.save(character: character) else {
+                    return .none
+                }
+                return Effect(value: Action.didSave)
+
+            case .didSave:
+                guard let characters = state.characters.loaded else { return .none }
+                return Effect(value: .didLoad(.success(characters)))
+
             case .characterDetails:
                 return .none
             }

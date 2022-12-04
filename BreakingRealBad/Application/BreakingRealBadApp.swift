@@ -1,9 +1,9 @@
 import SwiftUI
-import ComposableArchitecture
 
 @main
 struct BreakingRealBadApp: App {
-//    let persistenceController = PersistenceController.shared
+    @Environment(\.scenePhase) var scenePhase
+    let persistenceController = PersistenceController.shared
 
     var body: some Scene {
         WindowGroup {
@@ -17,8 +17,9 @@ struct BreakingRealBadApp: App {
                     )
                 )
             )
-//            ContentView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            .onChange(of: scenePhase) { _ in
+                persistenceController.save()
+            }
         }
     }
 }

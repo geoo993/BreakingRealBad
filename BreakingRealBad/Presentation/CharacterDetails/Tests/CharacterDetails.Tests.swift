@@ -33,7 +33,7 @@ final class CharacterDetailsTests: XCTestCase {
         }
         await testScheduler.advance(by: 1)
         await store.receive(.didLoad(.failure(AnyError(error)))) {
-            $0.quotes = Loading.from(result: .failure(AnyError(error)))
+            $0.quotes = .error(AnyError(error))
         }
     }
     
