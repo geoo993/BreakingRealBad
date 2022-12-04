@@ -17,9 +17,9 @@ enum APIError: Swift.Error, Equatable {
         case .invalidUrlComponent: return "We encountered an error with url component"
         case .decodingError(let description): return "Failed to decode data: \(description)"
         case .outdatedRequest: return "The url you requested is outdated"
-        case .noResponse: return "Did not get a HTTPURLResponse"
+        case .noResponse: return "We did not get a HTTPURLResponse"
         case .error(let statusCode): return "We had a server error with status code \(statusCode)"
-        case .limitReached: return "We reached the daily rate limit of 10,000 requests, try again tomorrow"
+        case .limitReached: return "We reached the daily rate limit of 10,000 requests,"
         }
     }
 }

@@ -5,6 +5,7 @@ enum Characters {
     struct State: Equatable {
         var characters: Loading<[Character]> = .idle
         var characterDetails: CharacterDetails.State = .init()
+        var alertMessage: String?
     }
 
     enum Action: Equatable {
@@ -13,6 +14,7 @@ enum Characters {
         case didSelect(Character)
         case didSave
         case characterDetails(CharacterDetails.Action)
+        case alertDismissed
     }
     
     struct Environment {
@@ -59,6 +61,7 @@ enum Characters {
                 return .none
             case let .didLoad(.failure(error)):
                 state.characters = .error(error)
+                state.alertMessage = (error.wrappedError as? CharacterRepository.Error)?.errorDescription ?? ""
                 return .none
             case let .didSelect(character):
                 guard let _ = try? environment.repository.save(character: character) else {
@@ -70,6 +73,9 @@ enum Characters {
                 guard let characters = state.characters.loaded else { return .none }
                 return Effect(value: .didLoad(.success(characters)))
 
+            case .alertDismissed:
+                state.alertMessage = nil
+                return .none
             case .characterDetails:
                 return .none
             }

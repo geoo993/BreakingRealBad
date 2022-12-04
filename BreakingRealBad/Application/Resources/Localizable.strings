@@ -1,7 +1,7 @@
-"error_alert_title" = "Hello 👋";
+"error_alert_title" = "Oops 😅";
 "error_alert_description" = "Looks like Something went wrong.\n %@ \nPlease try again later!";
 "error_alert_message" = "Something went wrong.\nPlease try again later!";
-"error_alert_cta" = "Ok";
+"error_alert_cta" = "Got it!";
 
 "characters_list__screen" = "Characters";
 "characters_details__sectionTitle" = "Quotes";

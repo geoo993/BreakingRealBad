@@ -50,6 +50,23 @@ extension Characters {
                 .onAppear {
                     viewStore.send(.fetchCharacters)
                 }
+                .alert(
+                    Text(TextState("error_alert_title".localized)),
+                    isPresented: Binding(
+                        get: {
+                            viewStore.alertMessage != nil
+                        }, set: { _,_ in }
+                    ),
+                    presenting: viewStore.alertMessage
+                ) { _ in
+                    Button("error_alert_cta".localized) {
+                        viewStore.send(.alertDismissed)
+                    }
+                } message: { message in
+                    Unwrap(message) { value in
+                        Text(value)
+                    }
+                }
             }
         }
     }
